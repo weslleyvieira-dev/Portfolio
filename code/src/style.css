@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url(/fonts/SpaceGrotesk-VariableFont_wght.ttf) format('truetype');
+}
+
+* {
+  font-family: "Space Grotesk", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --black: rgb(21, 21, 21);
+  --green: rgb(78, 225, 160);
+  --dark-grey: rgb(36, 36, 36);
+  --grey: rgb(217, 217, 217);
+}
+
+.text-heading-xl {
+  font-weight: bold;
+  font-size: 5.5rem;
+  line-height: 5.5rem;
+  letter-spacing: -0.156rem;
+  margin: 0;
+  color: white;
+}
+
+.text-heading-l {
+  font-weight: bold;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  letter-spacing: -0.094rem;
+  margin: 0;
+  color: white;
+}
+
+.text-heading-m {
+  font-weight: bold;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  margin: 0;
+  color: white;
+}
+
+.text-body {
+  font-weight: normal;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  margin: 0;
+  color: white;
+}
