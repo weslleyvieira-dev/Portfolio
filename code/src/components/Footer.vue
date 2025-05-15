@@ -58,7 +58,7 @@ function sendEmail() {
     })
     .then(
       () => {
-        aler("Email enviado com sucesso!");
+        alert("Email enviado com sucesso!");
       },
       (error) => {
         console.log("FAILED...", error);
