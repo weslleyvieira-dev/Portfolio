@@ -22,10 +22,10 @@ PC
 
 [![Screenshot - PC](</screenshots/PC (Thumb).png>)](/screenshots/PC.png)
 
-<!-- ### Links
+### Links
 
-- Solution URL: [GitHub](https://github.com/weslleyvieira-dev/)
-- Live Site URL: [Vercel](vercel.app/) -->
+- Solution URL: [GitHub](https://github.com/weslleyvieira-dev/Portfolio)
+- Live Site URL: [Vercel](https://portfolio-weslleyvieira-projects.vercel.app/)
 
 ### Built with
 
