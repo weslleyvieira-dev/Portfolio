@@ -3,6 +3,10 @@ import { ref } from "vue";
 
 const skills = ref([
   {
+    name: "Vue.js",
+    xp: "1.5 anos de experiência",
+  },
+  {
     name: "HTML",
     xp: "1.5 anos de experiência",
   },
@@ -11,16 +15,12 @@ const skills = ref([
     xp: "1.5 anos de experiência",
   },
   {
-    name: "Vue.js",
-    xp: "1 ano de experiência",
-  },
-  {
     name: "JavaScript",
     xp: "1 ano de experiência",
   },
   {
     name: "PostgreSQL",
-    xp: "1 ano de experiência",
+    xp: "6 meses de experiência",
   },
   {
     name: "Java",

@@ -1,33 +1,42 @@
 <script setup>
-import { ref, reactive, computed, watch } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import emailjs from "@emailjs/browser";
 import Header from "./Header.vue";
 
 const isSubmitted = ref(false);
-const currentTimestamp = ref("");
 
 const formData = reactive({
   name: "",
   email: "",
   message: "",
+  time: "",
 });
 
 const errors = reactive({
   name: "",
   email: "",
   message: "",
+  captcha: "",
 });
 
 function validateForm() {
   Object.keys(errors).forEach((key) => (errors[key] = ""));
+  const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   if (!formData.name) {
     errors.name = "Campo obrigatório";
+  } else if (
+    !nameRegex.test(formData.name) ||
+    formData.name.length < 2 ||
+    formData.name.length > 50
+  ) {
+    errors.name = "Nome inválido";
   }
 
   if (!formData.email) {
     errors.email = "Campo obrigatório";
-  } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+  } else if (!emailRegex.test(formData.email)) {
     errors.email = "Formato inválido";
   }
 
@@ -35,20 +44,24 @@ function validateForm() {
     errors.message = "Campo obrigatório";
   }
 
+  const captchaResponse = grecaptcha.getResponse(window.recaptchaWidgetId);
+  if (!captchaResponse) {
+    errors.captcha = "Confirme que você não é um robô";
+  }
+
   return Object.values(errors).every((error) => error === "");
 }
 
 function submitForm() {
   isSubmitted.value = true;
-  if (validateForm()) {
-    currentTimestamp.value = new Date().toISOString();
-    sendEmail();
-    clearForm();
-  }
-}
 
-function clearForm() {
-  Object.keys(formData).forEach((key) => (formData[key] = ""));
+  formData.time = new Date().toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+  });
+
+  if (validateForm()) {
+    sendEmail();
+  }
 }
 
 function sendEmail() {
@@ -59,13 +72,32 @@ function sendEmail() {
     .then(
       () => {
         alert("Email enviado com sucesso!");
+        window.location.reload(true);
       },
       (error) => {
         console.log("FAILED...", error);
-        alert("Erro ao enviar o email. Atualize a página e tente novamente.");
+        alert("Erro ao enviar o email. Tente novamente.");
+        window.location.reload(true);
       }
     );
 }
+
+function resetRecaptcha() {
+  grecaptcha.reset(window.recaptchaWidgetId);
+}
+
+onMounted(() => {
+  const checkGrecaptcha = setInterval(() => {
+    if (window.grecaptcha && document.getElementById("contact-recaptcha")) {
+      clearInterval(checkGrecaptcha);
+      window.recaptchaWidgetId = grecaptcha.render("contact-recaptcha", {
+        sitekey: "6LdWnDsrAAAAAPtbQf0i3V0XnfzdYEiqvcxKjIjZ",
+        theme: "dark",
+        "expired-callback": resetRecaptcha,
+      });
+    }
+  }, 1000);
+});
 
 watch(
   () => formData,
@@ -82,24 +114,27 @@ watch(
 
 <template>
   <footer>
-    <div class="contact-container">
-      <h1 class="text-heading-xl">Contato</h1>
+    <div id="contact" class="contact-container">
+      <div class="message-container">
+        <h1 class="text-heading-xl">Contato</h1>
+        <p class="text-body">
+          Estou à disposição para novas oportunidades.
+          <br />Deixe seu contato que retornarei o mais breve possível!
+        </p>
+      </div>
       <form id="contact-form" @submit.prevent="submitForm" class="contact-form">
         <div
           class="field-group"
           :class="{ 'has-error': isSubmitted && errors.name }"
         >
-        <input
-    type="hidden"
-    name="timestamp"
-    :value="currentTimestamp"
-  />
+          <input id="time" name="time" type="hidden" :value="formData.time" />
           <input
             id="name"
             name="name"
             placeholder="NOME"
-            v-model="formData.name"
+            v-model.trim="formData.name"
             type="text"
+            autocomplete="name"
             @input="formData.name = formData.name.toUpperCase()"
           />
           <span v-if="isSubmitted && errors.name" class="error">{{
@@ -115,8 +150,9 @@ watch(
             id="email"
             name="email"
             placeholder="EMAIL"
-            v-model="formData.email"
+            v-model.trim="formData.email"
             type="email"
+            autocomplete="email"
             @input="formData.email = formData.email.toUpperCase()"
           />
           <span v-if="isSubmitted && errors.email" class="error">{{
@@ -132,7 +168,7 @@ watch(
             id="message"
             name="message"
             placeholder="MENSAGEM"
-            v-model="formData.message"
+            v-model.trim="formData.message"
             @input="formData.message = formData.message.toUpperCase()"
           />
           <span v-if="isSubmitted && errors.message" class="error">{{
@@ -140,13 +176,12 @@ watch(
           }}</span>
         </div>
 
-        <div
-          name="g-recaptcha-response"
-          class="g-recaptcha"
-          data-sitekey="6LdWnDsrAAAAAPtbQf0i3V0XnfzdYEiqvcxKjIjZ"
-          data-theme="dark"
-        ></div>
-        <button type="submit" value="ENVIAR MENSAGEM" class="contact-button">
+        <div id="contact-recaptcha" class="g-recaptcha"></div>
+        <span v-if="isSubmitted && errors.captcha" class="error">
+          {{ errors.captcha }}
+        </span>
+
+        <button type="submit" value="ENVIAR MENSAGEM" class="submit-button">
           ENVIAR MENSAGEM
         </button>
       </form>
@@ -159,9 +194,9 @@ watch(
 footer {
   position: absolute;
   left: 0;
-  width: 100vw;
+  width: 100%;
   background-color: var(--dark-grey);
-  padding: 5.25rem 10.25rem;
+  padding: 5rem 10rem;
   box-sizing: border-box;
 }
 
@@ -171,12 +206,18 @@ footer {
   border-bottom: 1px solid white;
 }
 
+.message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
 .contact-form {
   display: flex;
   flex-direction: column;
   min-width: 35%;
   gap: 0;
-  padding-bottom: 5.75rem;
+  padding: 2rem 0 3rem;
 }
 
 .field-group {
@@ -208,6 +249,7 @@ footer {
 .field-group textarea {
   height: 6.75rem;
   padding: 0 1.5rem 0.5rem;
+  resize: none;
 }
 
 .field-group input:focus,
@@ -221,11 +263,11 @@ footer {
 }
 
 .g-recaptcha {
-  align-self: center;
-  margin-bottom: 2rem;
+  align-self: end;
 }
 
-.contact-button {
+.contact-button,
+.submit-button {
   align-self: flex-end;
   width: fit-content;
   font-weight: bold;
@@ -242,7 +284,12 @@ footer {
   cursor: pointer;
 }
 
-.contact-button:hover {
+.submit-button {
+  margin-top: 2rem;
+}
+
+.contact-button:hover,
+.submit-button:hover {
   color: var(--green);
 }
 

@@ -17,9 +17,9 @@
 
 .text-heading-xl {
   font-weight: bold;
-  font-size: 5.5rem;
-  line-height: 5.5rem;
-  letter-spacing: -0.156rem;
+  font-size: 4.25rem;
+  line-height: 4.25rem;
+  letter-spacing: -0.2rem;
   margin: 0;
   color: white;
 }
@@ -28,7 +28,7 @@
   font-weight: bold;
   font-size: 3rem;
   line-height: 3.5rem;
-  letter-spacing: -0.094rem;
+  letter-spacing: -0.1rem;
   margin: 0;
   color: white;
 }

@@ -1,7 +1,10 @@
 <script setup>
 const rings = [
   { top: "5%", side: "left", offset: "0" },
-  { top: "35%", side: "right", offset: "0" },
+  { top: "25%", side: "right", offset: "0" },
+  { top: "45%", side: "left", offset: "0" },
+  { top: "65%", side: "right", offset: "0" },
+  { top: "85%", side: "left", offset: "0" },
 ];
 </script>
 

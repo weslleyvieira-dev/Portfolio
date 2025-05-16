@@ -33,7 +33,7 @@
 header {
   display: flex;
   justify-content: space-between;
-  padding: 2.5rem 1.875rem 2.5rem 0;
+  padding: 2.5rem 0;
 }
 
 header span {

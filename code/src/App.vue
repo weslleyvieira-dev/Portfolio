@@ -2,7 +2,7 @@
 import Header from "./components/Header.vue";
 import Skills from "./components/Skills.vue";
 import Projects from "./components/Projects.vue";
-import Footer from "./components/Footer.vue";
+import Contact from "./components/Contact.vue";
 import BackgroundPattern from "./components/BackgroundPattern.vue";
 </script>
 
@@ -14,28 +14,34 @@ import BackgroundPattern from "./components/BackgroundPattern.vue";
       <div class="presentation-container">
         <h1 class="text-heading-xl">Bem-vindo(a)!</h1>
         <h1 class="text-heading-xl">
-          Eu sou o <span class="name-underline">Weslley Vieira</span>.
+          Eu sou <span class="name-underline">Weslley Vieira</span>.
         </h1>
         <p class="text-body">
-          Sou um desenvolvedor front-end apaixonado por construir aplicações web
-          que sejam intuitivas e acessíveis.
+          Sou um desenvolvedor front-end, focado em apresentar interfaces web
+          elegantes, intuitivas e totalmente acessíveis, unindo criatividade e
+          boas práticas para transformar ideias em experiências digitais que
+          encantam todos os usuários.
         </p>
-        <a class="contact-button">CONTATO</a>
+        <a href="#contact" class="contact-button">CONTATO</a>
       </div>
       <img class="presentation-pic" src="/assets/images/profile-pic.png" />
     </div>
     <Skills />
     <Projects />
+    <Contact />
   </main>
-  <Footer />
 </template>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--black);
   position: relative;
   margin: 0;
-  padding: 0 10.25rem;
+  padding: 0 10rem;
 }
 </style>
 
@@ -44,7 +50,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5rem 0 12rem;
+  padding: 5rem 0 4.5rem;
   border-bottom: 1px solid white;
 }
 
@@ -77,7 +83,8 @@ body {
   letter-spacing: 0.143rem;
   color: white;
   text-transform: uppercase;
-  margin: 1.125rem 0;
+  text-decoration: none;
+  margin: 1.125rem 0 0;
   padding-bottom: 0.625rem;
   border-bottom: 2px solid var(--green);
   cursor: pointer;

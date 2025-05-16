@@ -51,7 +51,7 @@ const projects = ref([
   <div class="projects-container">
     <div class="top">
       <h1 class="text-heading-xl">Projetos</h1>
-      <a class="view-button">CONTATO</a>
+      <a href="#contact" class="view-button">CONTATO</a>
     </div>
     <div class="projects-grid">
       <div v-for="item in projects" class="project-group">
@@ -105,7 +105,7 @@ const projects = ref([
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4.375rem 1.875rem;
+  gap: 4rem 2rem;
 }
 
 .project-group {
