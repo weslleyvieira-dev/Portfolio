@@ -55,20 +55,35 @@ function validateForm() {
 function submitForm() {
   isSubmitted.value = true;
 
-  formData.time = new Date().toLocaleString("pt-BR", {
-    timeZone: "America/Sao_Paulo",
-  });
-
   if (validateForm()) {
     sendEmail();
   }
 }
 
 function sendEmail() {
+  formData.time = new Date().toLocaleString("pt-BR", {
+    timeZone: "America/Sao_Paulo",
+  });
+
   emailjs
-    .sendForm("wellsz-projects", "wellsz-portfolio-contact", "#contact-form", {
-      publicKey: "t7EhqsPPj5zZj1qPz",
-    })
+    .send(
+      "wellsz-projects",
+      "wellsz-portfolio-contact",
+      {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        time: new Date().toLocaleString("pt-BR", {
+          timeZone: "America/Sao_Paulo",
+        }),
+        "g-recaptcha-response": grecaptcha.getResponse(
+          window.recaptchaWidgetId
+        ),
+      },
+      {
+        publicKey: "t7EhqsPPj5zZj1qPz",
+      }
+    )
     .then(
       () => {
         alert("Email enviado com sucesso!");
@@ -127,7 +142,7 @@ watch(
           class="field-group"
           :class="{ 'has-error': isSubmitted && errors.name }"
         >
-          <input id="time" name="time" type="hidden" :value="formData.time" />
+          <input id="time" name="time" type="hidden" v-model="formData.time" />
           <input
             id="name"
             name="name"
