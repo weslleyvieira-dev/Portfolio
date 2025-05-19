@@ -42,7 +42,7 @@ const skills = ref([
 .skills-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3.75rem;
+  gap: 3.75rem 0;
   margin: 4.5rem 0 8.75rem;
 }
 
@@ -50,5 +50,27 @@ const skills = ref([
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+@media (max-width: 1024px) {
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 0;
+    margin: 3rem 0 6rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .skills-container {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem 0;
+    margin: 2.5rem 0 5rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid white;
+  }
+
+  .skill-group {
+    align-items: center;
+  }
 }
 </style>

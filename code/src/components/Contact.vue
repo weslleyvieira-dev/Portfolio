@@ -333,4 +333,61 @@ footer header {
   margin-top: 3rem;
   padding: 0;
 }
+
+@media (max-width: 1024px){
+  footer {
+    padding: 3.75rem 1.875rem 2.5rem;
+  }
+
+  .contact-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .message-container {
+    align-items: center;
+    text-align: center;
+    width: 28rem;
+    gap: 1.25rem;
+  }
+
+  .contact-form {
+    width: 28rem;
+    padding: 0 0 5rem;
+  }
+
+  footer header {
+    margin-top: 1.875rem;
+  }
+}
+
+@media (max-width: 767px){
+  footer {
+    padding: 3.75rem 1rem;
+  }
+
+  .message-container {
+    width: 100%;
+  }
+
+  .text-heading-xl {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+
+  .text-body {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    text-align: center;
+  }
+
+  .contact-form {
+    width: 100%;
+  }
+
+  footer header {
+    margin-top: 2.5rem;
+  }
+}
 </style>

@@ -88,4 +88,19 @@ header span {
   filter: brightness(0) saturate(100%) invert(77%) sepia(21%) saturate(1073%)
     hue-rotate(98deg) brightness(95%) contrast(92%);
 }
+
+@media (max-width: 1024px) {
+  header {
+    padding: 1.875rem 0;
+  }
+}
+
+@media (max-width: 767px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.75rem 0;
+    gap: 1.75rem;
+  }
+}
 </style>
