@@ -17,14 +17,18 @@ import BackgroundPattern from "./components/BackgroundPattern.vue";
           Eu sou <span class="name-underline">Weslley Vieira</span>.
         </h1>
         <p class="text-body">
-          Sou um desenvolvedor front-end, focado em apresentar interfaces web
-          elegantes, intuitivas e totalmente acessíveis, unindo criatividade e
-          boas práticas para transformar ideias em experiências digitais que
-          encantam todos os usuários.
+          Sou um desenvolvedor front-end, formado em Engenharia de Software,
+          focado em criar interfaces web elegantes, intuitivas e totalmente
+          acessíveis. Uno criatividade e boas práticas para transformar ideias
+          em experiências digitais que encantam os usuários.
         </p>
         <a href="#contact" class="contact-button">CONTATO</a>
       </div>
-      <img class="presentation-pic" src="/assets/images/profile-pic.png" />
+      <img
+        class="presentation-pic"
+        src="/assets/images/profile-pic.jpg"
+        draggable="false"
+      />
     </div>
     <Skills />
     <Projects />
@@ -71,7 +75,6 @@ body {
 }
 
 .presentation-container p {
-  width: 85%;
   margin: 3rem 0;
 }
 
@@ -95,7 +98,6 @@ body {
 }
 
 .presentation-pic {
-  justify-self: flex-end;
   height: 23rem;
   width: 23rem;
   border-radius: 50%;

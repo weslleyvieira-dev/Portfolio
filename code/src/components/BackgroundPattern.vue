@@ -1,10 +1,10 @@
 <script setup>
 const rings = [
-  { top: "5%", side: "left", offset: "0" },
-  { top: "25%", side: "right", offset: "0" },
-  { top: "45%", side: "left", offset: "0" },
-  { top: "65%", side: "right", offset: "0" },
-  { top: "85%", side: "left", offset: "0" },
+  { top: "5%", side: "left"},
+  { top: "30%", side: "right"},
+  { top: "50%", side: "left"},
+  { top: "70%", side: "right"},
+  { top: "90%", side: "left"},
 ];
 </script>
 
@@ -15,7 +15,7 @@ const rings = [
       :key="i"
       class="ring"
       :class="ring.side"
-      :style="{ top: ring.top, [ring.side]: ring.offset }"
+      :style="{ top: ring.top, [ring.side]: 0 }"
     />
   </div>
 </template>
