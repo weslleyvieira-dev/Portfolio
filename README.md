@@ -18,9 +18,11 @@ Users should be able to:
 
 ### Screenshot
 
-PC
+PC | Mobile | Tablet
 
 [![Screenshot - PC](</screenshots/PC (Thumb).png>)](/screenshots/PC.png)
+[![Screenshot - Mobile](</screenshots/Mobile (Thumb).png>)](/screenshots/Mobile.png)
+[![Screenshot - Tablet](</screenshots/Tablet (Thumb).png>)](/screenshots/Tablet.png)
 
 ### Links
 
